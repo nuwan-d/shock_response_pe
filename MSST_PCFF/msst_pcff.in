@@ -1,0 +1,51 @@
+# Nuwan Dewapriya (2021/11/03)
+
+# ----------------- LAMMPS input script-----------------
+units              real
+atom_style         full
+boundary           p p p
+
+# ----------------- Interaction potential definition-----------------
+
+pair_style	lj/class2/coul/long 9.5
+bond_style	class2
+angle_style	class2
+dihedral_style	class2
+improper_style	class2
+pair_modify	mix sixthpower tail yes
+special_bonds	lj/coul 0 0 1
+
+read_data      	   "data_pcff"
+include            "10nm_cube.params"
+
+# -----------------Integration conditions-----------------
+
+timestep       0.1
+variable       t_step equal 0.1
+kspace_style	pppm 0.0001
+
+
+# ----------------- Minimize Section -----------------
+
+min_style          cg
+min_modify         dmax 0.4
+minimize           1e-8 1e-10 10000 50000
+reset_timestep     0
+
+
+#-------------------MSST fix---------------------------------------
+
+fix  	1 all nve
+fix     2 all langevin 300.0 300.0 $(100.0*v_t_step) 90429997
+
+thermo 		4000
+run           20000
+
+
+reset_timestep     0
+unfix	1
+unfix	2
+
+fix 	msst all msst z 0.04
+
+run	        500000
