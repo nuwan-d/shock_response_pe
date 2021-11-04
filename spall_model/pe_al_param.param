@@ -1,0 +1,79 @@
+# Pair Coeffs	
+
+pair_coeff 	 * * eam/alloy Al_EA.eam.alloy NULL NULL Al
+												
+pair_coeff	1	1  lj/class2/coul/long	0.00234	3.81	#	c,c						
+pair_coeff	2	2  lj/class2/coul/long	0.00087	3.3	#	hc,hc						
+pair_coeff	1	3  lj/class2/coul/long	0.01218	3.665694839	#	c,al						
+pair_coeff	2	3  lj/class2/coul/long	0.01058	2.98557557	#	hc,al						
+												
+# Bond Coeffs												
+												
+bond_coeff	1	1.53	12.99467	-21.75838	29.47877	#	c,c					
+bond_coeff	2	1.101	14.96032	-30.00260	36.62460	#	c,hc					
+												
+# Angle Coeffs												
+												
+angle_coeff	1	112.67	1.71354	-0.32275	-0.41448	#	c,c,c					
+angle_coeff	2	110.77	1.79754	-0.45982	0.22241	#	c,c,hc					
+angle_coeff	3	107.66	1.71896	-0.56030	-0.10545	#	hc,c,hc					
+												
+# BondBond Coeffs												
+												
+angle_coeff	1	bb	0.00000	1.53	1.53	#	c,c,c					
+angle_coeff	2	bb	0.14688	1.53	1.101	#	c,c,hc					
+angle_coeff	3	bb	0.23120	1.101	1.101	#	hc,c,hc					
+												
+# BondAngle Coeffs												
+												
+angle_coeff	1	ba	0.34760	0.34760	1.53	1.53	#	c,c,c				
+angle_coeff	2	ba	0.89996	0.49525	1.53	1.101	#	c,c,hc				
+angle_coeff	3	ba	0.78500	0.78500	1.101	1.101	#	hc,c,hc				
+												
+# Dihedral Coeffs												
+												
+dihedral_coeff	1	0.00000	0.00	0.00223	0	-0.00620	0	#	c,c,c,c			
+dihedral_coeff	2	0.00000	0.00	0.00137	0	-0.00729	0	#	c,c,c,hc			
+dihedral_coeff	3	-0.00621	0.00	0.00268	0	-0.00470	0	#	hc,c,c,hc			
+												
+# MiddleBondTorsion Coeffs												
+												
+dihedral_coeff	1	mbt	-0.77130	-0.31168	0.00000	1.53	#	c,c,c,c				
+dihedral_coeff	2	mbt	-0.64520	-0.15863	-0.01361	1.53	#	c,c,c,hc				
+dihedral_coeff	3	mbt	-0.61840	-0.02308	-0.02109	1.53	#	hc,c,c,hc				
+												
+# EndBondTorsion Coeffs												
+												
+dihedral_coeff	1	ebt	-0.00317	0.00000	0.00000	-0.00317	0.00000	0.00000	1.53000	1.53000	#	c,c,c,c
+dihedral_coeff	2	ebt	0.01078	0.01050	-0.00401	0.00353	0.00256	0.00962	1.53000	1.10100	#	c,c,c,hc
+dihedral_coeff	3	ebt	0.00924	0.01353	0.00337	0.00924	0.01353	0.00337	1.10100	1.10100	#	hc,c,c,hc
+												
+# AngleTorsion Coeffs												
+												
+dihedral_coeff	1	at	0.01685	-0.01361	0.00602	0.01685	-0.01361	0.00602	112.67000	112.67000	#	c,c,c,c
+dihedral_coeff	2	at	-0.01064	0.00000	-0.00493	0.01350	0.01958	-0.00862	112.67000	110.77000	#	c,c,c,hc
+dihedral_coeff	3	at	-0.03506	0.02415	-0.01069	-0.03506	0.02415	-0.01069	110.77000	110.77000	#	hc,c,c,hc
+												
+# AngleAngleTorsion Coeffs												
+												
+dihedral_coeff	1	aat	-0.95594	112.67	112.67	#	c,c,c,c					
+dihedral_coeff	2	aat	-0.70092	112.67	110.77	#	c,c,c,hc					
+dihedral_coeff	3	aat	-0.54482	110.77	110.77	#	hc,c,c,hc					
+												
+# BondBond13 Coeffs												
+												
+dihedral_coeff	1	bb13	0.00000	1.53	1.53	#	c,c,c,c					
+dihedral_coeff	2	bb13	0.00000	1.53	1.101	#	c,c,c,hc					
+dihedral_coeff	3	bb13	0.00000	1.101	1.101	#	hc,c,c,hc					
+												
+# Improper Coeffs												
+												
+improper_coeff	1	0.00000	0.00	#	c,c,c,hc							
+improper_coeff	2	0.00000	0.00	#	c,c,hc,hc							
+improper_coeff	3	0.00000	0.00	#	c,hc,hc,hc							
+												
+# AngleAngle Coeffs												
+												
+improper_coeff	1	aa	-0.05724	-0.05724	0.00513	112.67	110.77	110.77	#	c,c,c,hc		
+improper_coeff	2	aa	0.01187	-0.02092	0.01187	110.77	110.77	107.66	#	c,c,hc,hc		
+improper_coeff	3	aa	-0.01369	-0.01369	-0.01369	107.66	107.66	107.66	#	c,hc,hc,hc		

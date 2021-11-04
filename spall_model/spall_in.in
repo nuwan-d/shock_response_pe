@@ -1,0 +1,72 @@
+# Nuwan Dewapriya (2021/11/03)
+
+# ----------------- LAMMPS atomistic input script-----------------
+units               metal
+atom_style 	        full
+newton 		        on
+boundary            p p p
+
+# ----------------- Interaction potential definition-----------------
+
+processors 1 * *
+
+pair_style	    hybrid eam/alloy lj/class2/coul/long 12
+bond_style	    class2
+angle_style	    class2
+dihedral_style	class2
+improper_style	class2
+pair_modify	mix sixthpower tail yes
+special_bonds	lj/coul 0 0 1
+kspace_style	pppm 1e-06
+
+read_data       "spall_data.data"
+
+include         "pe_al_param.param"
+
+improper_style	none
+
+neigh_modify    delay 10 every 1 check yes one 10000
+
+# ----------------- Minimize-----------------
+
+min_style          cg
+min_modify         dmax 0.1
+minimize           1e-8 1e-10 10000 10000
+reset_timestep     0
+
+
+group pe_block type 1 2
+group al_block type 3
+
+######################################
+
+variable tstp equal 0.0001
+timestep ${tstp}
+variable tdamp equal "v_tstp * 100"
+variable pdamp equal "v_tstp * 1000"
+
+
+#############################################################
+
+fix  	1 pe_block nve/limit 0.1
+fix  	2 pe_block langevin 300 300 ${tdamp} 90429997
+run     100000
+
+unfix   1
+fix  	1 all nve
+run     100000
+unfix    2
+
+#############################################
+
+fix     move_pist al_block move linear 10 0 0 units box
+
+thermo  1000
+
+fix     5 all bond/break 100 1 2
+
+run     200000
+
+unfix   move_pist
+
+run     800000
