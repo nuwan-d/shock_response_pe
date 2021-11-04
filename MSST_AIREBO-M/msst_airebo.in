@@ -1,6 +1,6 @@
 # Nuwan Dewapriya (2021/11/03)
 
-# ----------------- LAMMPS atomistic input script-----------------
+# ----------------- LAMMPS input script-----------------
 
 units              metal
 atom_style 	   full
