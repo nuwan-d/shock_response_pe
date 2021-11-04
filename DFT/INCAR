@@ -1,0 +1,11 @@
+Nuwan Dewapriya (2021/05/15)
+  System = pe relaxation
+  PREC   = Normal           
+  ENCUT = 700             
+  LREAL = Auto           
+  NSW      = 500          
+  IBRION   = 2             
+  ISIF     = 2             
+  ISMEAR = 0               
+  SIGMA    = 0.1          
+  NCORE = 5
