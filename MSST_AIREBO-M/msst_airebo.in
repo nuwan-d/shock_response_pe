@@ -1,0 +1,44 @@
+# Nuwan Dewapriya (2021/11/03)
+
+# ----------------- LAMMPS atomistic input script-----------------
+
+units              metal
+atom_style 	   full
+newton 		   on
+boundary           p p p
+
+# ----------------- Interaction potential definition-----------------
+
+
+read_data      	   "data_airebo"
+pair_style airebo/morse 3.0
+pair_coeff * * CH.airebo-m C H
+
+
+timestep       0.0001
+variable       t_step equal 0.0001
+
+
+# ----------------- Minimize-----------------
+
+min_style          cg
+min_modify         dmax 0.4
+minimize           1e-8 1e-10 10000 50000
+reset_timestep     0
+
+#-------------------MSST fix---------------------------------------
+
+fix  	1 all nve
+fix     2 all langevin 300.0 300.0 $(100.0*v_t_step) 90429997
+
+thermo 		4000
+run           20000
+
+reset_timestep     0
+unfix	1
+unfix	2
+
+fix 	msst all msst z 4
+
+
+run	        500000
